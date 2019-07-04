@@ -3,6 +3,8 @@ project(eigenpy)
 
 find_package(catkin REQUIRED)
 
+find_package(Python COMPONENTS NumPy REQUIRED)
+
 include(ExternalProject)
 
 ExternalProject_Add(eigenpy
@@ -28,14 +30,14 @@ ExternalProject_Add_Step(eigenpy CopyToDevel
 if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
   message(STATUS "Compiling for install workspace (${CMAKE_INSTALL_PREFIX})")
   catkin_package(
-    INCLUDE_DIRS include/${PROJECT_NAME} ${EIGEN3_INCLUDE_DIR}
+    INCLUDE_DIRS include/${PROJECT_NAME} ${Python_NumPy_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}
     LIBRARIES ${PYTHON_LIBRARIES} eigenpy
   )
 else()
   message(STATUS "Compiling for devel workspace")
   file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME})
   catkin_package(
-    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include ${EIGEN3_INCLUDE_DIR}
+    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include ${Python_NumPy_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}
     LIBRARIES ${PYTHON_LIBRARIES} eigenpy
   )
 endif()
