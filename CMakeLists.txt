@@ -17,9 +17,10 @@ ExternalProject_Add(eigenpy
 )
 ExternalProject_Add_Step(eigenpy CopyToDevel
   COMMENT "Copying to devel"
+  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/install/lib/libeigenpy.cpython-36m-x86_64-linux-gnu.so ${PROJECT_BINARY_DIR}/install/lib/libeigenpy.so
   COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/install/lib/libeigenpy.so ${CATKIN_DEVEL_PREFIX}/lib/
-  COMMAND ${CMAKE_COMMAND} -E make_directory ${CATKIN_DEVEL_PREFIX}/lib/python2.7/site-packages/
-  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/install/lib/python2.7/site-packages/eigenpy.so ${CATKIN_DEVEL_PREFIX}/lib/python2.7/site-packages/
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${CATKIN_DEVEL_PREFIX}/lib/python3.6/site-packages/
+  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/install/lib/python3.6/site-packages/eigenpy.so ${CATKIN_DEVEL_PREFIX}/lib/python3.6/site-packages/
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_BINARY_DIR}/install/include/${PROJECT_NAME}/ ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/
   DEPENDEES install
 )
@@ -48,6 +49,6 @@ install(
   DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
 install(
-  FILES ${CATKIN_DEVEL_PREFIX}/lib/python2.7/site-packages/eigenpy.so
+  FILES ${CATKIN_DEVEL_PREFIX}/lib/python3.6/site-packages/eigenpy.so
   DESTINATION ${CATKIN_GLOBAL_PYTHON_DESTINATION}
 )
